@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="VCO Registered Valuers. Independent registered valuers.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>VCO Registered Valuers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: one editorial column. The index is the navigation. Hand-stippled dots gather in the hero and rise in the footer. */
+:root{
+  --ink:#141412;
+  --cream:#F2EEE6;
+  --cream-veil:rgba(242,238,230,.94);
+  --yellow:#EFB21E;
+  --yellow-light:#F3C04A;
+  --grey:#5a5650;
+  --rule:#d6cfc1;
+  --sans:Jost,"Futura PT",Futura,"Century Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --gutter:clamp(16px,3.4vw,48px);
+  --ease:cubic-bezier(.2,.75,.25,1);
+  --lockup:clamp(150px,15vw,210px);
+  --head-h:calc(56px + var(--lockup) * .2447);
+  color-scheme:light;
+}
+html{background:var(--cream);-webkit-text-size-adjust:100%}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;
+  font-kerning:normal;font-synthesis:none;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--cream)}
+::selection{background:var(--yellow-light);color:var(--ink)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:5px}
+.wrap{max-width:1440px;margin:0 auto;box-sizing:border-box;
+  padding-left:max(var(--gutter),env(safe-area-inset-left,0px));
+  padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* Dot field behind the masthead */
+#field{position:absolute;left:0;top:0;width:100%;height:0;pointer-events:none;z-index:0;display:block}
+
+/* Header: fixed, compacts to the mark once you scroll */
+.site{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:5;
+  transition:background-color .35s var(--ease),box-shadow .35s var(--ease)}
+.site .bar{display:flex;align-items:center;justify-content:space-between;gap:12px 32px;padding-block:28px;
+  transition:padding .45s var(--ease)}
+.brand{display:block;text-decoration:none;border-radius:2px}
+.lockup{display:block;width:var(--lockup);height:auto;transition:width .45s var(--ease)}
+.lockup .rv{transition:opacity .25s ease}
+.site.is-compact{background:var(--cream-veil);box-shadow:0 1px 0 var(--rule);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.site.is-compact .bar{padding-block:14px}
+.site.is-compact .lockup{width:150px}
+.site.is-compact .lockup .rv{opacity:0}
+.cta{display:inline-flex;align-items:center;gap:.7em;font-family:var(--mono);font-size:13px;letter-spacing:.16em;
+  text-transform:uppercase;text-decoration:none;white-space:nowrap;padding-block:6px}
+.cta svg{width:7px;height:7px;flex:none;transition:transform .4s var(--ease)}
+.cta span{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .4s var(--ease)}
+.cta:hover span,.cta:focus-visible span{background-size:100% 1px}
+.cta:hover svg{transform:scale(1.5)}
+
+main{position:relative;padding-top:var(--head-h)}
+
+/* Hero */
+.hero{position:relative;z-index:1;padding-block:clamp(64px,9vw,128px) clamp(64px,8.5vw,120px)}
+.hero h1{margin:0;font-weight:400;font-size:clamp(46px,7.4vw,108px);line-height:.98;letter-spacing:-.02em;
+  max-width:11.5em;text-wrap:balance}
+.lede{margin:clamp(22px,2.6vw,36px) 0 0;font-size:clamp(19px,1.65vw,23px);line-height:1.45;max-width:30ch;text-wrap:pretty}
+
+/* Index */
+.index{position:relative;z-index:1}
+.index ol{list-style:none;margin:0;padding:0}
+.row{display:grid;grid-template-columns:4rem minmax(0,1.15fr) minmax(0,1fr) 2.5rem;column-gap:2rem;row-gap:10px;
+  align-items:baseline;padding-block:clamp(24px,2.4vw,36px);border-top:1px solid var(--ink);text-decoration:none}
+.index li:last-child .row{border-bottom:1px solid var(--ink)}
+.num{position:relative;display:block;font-family:var(--mono);font-size:14px;line-height:1.5;font-variant-numeric:tabular-nums}
+.cluster{position:absolute;left:2.2em;top:50%;width:30px;height:30px;margin-top:-16px;overflow:visible}
+.cluster path{transform-box:fill-box;transform-origin:center;opacity:0;transform:translate(var(--x),var(--y)) scale(.3);
+  transition:transform .55s var(--ease),opacity .3s ease}
+.cluster path.seed{opacity:1;transform:none}
+.row:hover .cluster path,.row:focus-visible .cluster path{opacity:1;transform:none;transition-delay:var(--d)}
+.title{font-size:clamp(34px,4.4vw,64px);line-height:1;letter-spacing:-.012em}
+.detail{font-family:var(--mono);font-size:15px;line-height:1.7;color:var(--ink);text-wrap:pretty}
+.arrow{justify-self:end;align-self:center;width:28px;height:20px;transition:transform .45s var(--ease)}
+.row:hover .arrow,.row:focus-visible .arrow{transform:translateX(7px)}
+.row:focus-visible{outline-offset:-2px}
+
+/* About */
+.about{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:40px 80px;padding-block:clamp(80px,9vw,128px) clamp(56px,6vw,88px)}
+.statement{flex:999 1 520px;min-width:0;margin:0;font-size:clamp(28px,2.9vw,42px);line-height:1.18;letter-spacing:-.01em;max-width:21em;text-wrap:pretty}
+.team{flex:1 1 280px;min-width:0}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);margin-bottom:14px}
+.names{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 24px;font-family:var(--mono);font-size:14px}
+
+/* Footer */
+footer{position:relative}
+#rise{display:block;width:100%;height:clamp(130px,15vw,240px)}
+.foot{display:flex;flex-wrap:wrap;gap:10px 32px;justify-content:space-between;padding-block:22px 34px;
+  font-family:var(--mono);font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums}
+
+@media (max-width:760px){
+  .row{grid-template-columns:3.25rem minmax(0,1fr) 2rem;column-gap:1rem}
+  .detail{grid-column:2/3;grid-row:2;font-size:13.5px}
+  .arrow{grid-column:3;grid-row:1}
+  .cluster{left:1.9em;width:26px;height:26px;margin-top:-14px}
+  .cta{font-size:11.5px;letter-spacing:.12em}
+  .cta svg{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important}
+}
+</style>
+</head>
+<body>
+
+<canvas id="field" aria-hidden="true"></canvas>
+<div id="sentinel" aria-hidden="true" style="position:absolute;top:140px;left:0;width:1px;height:1px"></div>
+
+<header class="site" id="top">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="VCO Registered Valuers, home">
+      <svg class="lockup" viewBox="27 -10 948 232" aria-hidden="true"><g fill="#141412"><mask id="hdKo" maskUnits="userSpaceOnUse" x="150" y="-60" width="350" height="320"><rect x="150" y="-60" width="350" height="320" fill="#ffffff"/><path fill="#000000" stroke="#000000" stroke-width="11" stroke-linejoin="round" d="M424.3,123.5 A76,105 18 1 1 279.7,76.5 A76,105 18 1 1 424.3,123.5Z M390.14,125.72 A46,93.75 34 0 0 404.42,22.28 A46,93.75 34 0 0 313.86,74.28 A46,93.75 34 0 0 299.58,177.72 A46,93.75 34 0 0 390.14,125.72Z"/></mask><path d="M33.1,0.0 L49.1,0.0 L140.5,185.0 L136.6,205.0 Z M174.2,0.0 L220.2,0.0 L136.6,205.0 L128.5,188.9 Z"/><path mask="url(#hdKo)" d="M330.0,-0.6 C258.0,-13.3 196.0,35.6 196.0,99.4 C196.0,165.3 258.0,216.3 330.0,199.3 C270.0,195.0 229.0,156.8 229.0,99.4 C229.0,44.1 270.0,8.0 330.0,-0.6 Z"/><path d="M424.3,123.5 A76,105 18 1 1 279.7,76.5 A76,105 18 1 1 424.3,123.5Z M390.14,125.72 A46,93.75 34 0 0 404.42,22.28 A46,93.75 34 0 0 313.86,74.28 A46,93.75 34 0 0 299.58,177.72 A46,93.75 34 0 0 390.14,125.72Z"/><text class="rv" x="491" y="200" textLength="470" lengthAdjust="spacing" style="font-family:Jost,sans-serif;font-size:34.3px;font-weight:400">REGISTERED VALUERS</text></g></svg>
+    </a>
+    <a class="cta" href="#contact"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#EFB21E" d="M10.4 0.9C15.2 1.1 19.2 4.6 19.0 10.1C18.8 15.2 15.0 19.2 9.7 19.0C4.6 18.8 0.9 15.1 1.0 9.9C1.2 4.7 5.3 0.7 10.4 0.9Z"/></svg><span>Request a valuation</span></a>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" id="hero">
+    <h1>Independent registered valuers.</h1>
+    <p class="lede">Good people who happen to be very good at what we do.</p>
+  </section>
+
+  <nav class="index wrap" aria-label="Main">
+    <ol>
+      <li><a class="row" href="#services"><span class="num">01</span><span class="title">Services</span><span class="detail">Property valuation · Insurance valuation · Government</span><svg class="arrow" viewBox="0 0 28 20" aria-hidden="true"><path d="M1 10H26M18.5 2.5L26 10l-7.5 7.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></li>
+      <li><a class="row" href="#property"><span class="num">02</span><span class="title">Property types</span><span class="detail">Residential · Commercial · Industrial · Rural · Lifestyle · Development land</span><svg class="arrow" viewBox="0 0 28 20" aria-hidden="true"><path d="M1 10H26M18.5 2.5L26 10l-7.5 7.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></li>
+      <li><a class="row" href="#about"><span class="num">03</span><span class="title">About us</span><span class="detail">Twelve people, independently owned. We answer to each other and to our clients.</span><svg class="arrow" viewBox="0 0 28 20" aria-hidden="true"><path d="M1 10H26M18.5 2.5L26 10l-7.5 7.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></li>
+      <li><a class="row" href="#contact"><span class="num">04</span><span class="title">Contact</span><span class="detail">[phone] · [email]</span><svg class="arrow" viewBox="0 0 28 20" aria-hidden="true"><path d="M1 10H26M18.5 2.5L26 10l-7.5 7.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></li>
+    </ol>
+  </nav>
+
+  <section class="about wrap" id="about">
+    <p class="statement">Every valuation goes out with our name on it, and we intend to make that name worth something.</p>
+    <div class="team">
+      <div class="label">The collective</div>
+      <ul class="names">
+        <li>Jason Wong</li><li>Kurt Brunsdon</li><li>Adam Mercer</li><li>Ben Fraser</li><li>Daniel Patel</li><li>Luke Bennett</li>
+        <li>Simon Clarke</li><li>Hannah Reid</li><li>Tom Gallagher</li><li>Priya Nair</li><li>Sam Whitaker</li><li>Olivia Tane</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <canvas id="rise" aria-hidden="true"></canvas>
+  <div class="wrap foot"><span>© 2026 VCO Registered Valuers</span><span>[phone] · [email] · [Office address]</span></div>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const SHADES = ['#EFB21E', '#E8A514', '#F3C04A', '#DE9A0E'];
+  const TAU = Math.PI * 2;
+  const $ = s => document.querySelector(s);
+
+  // Seeded PRNG, so the stipple is the same drawing every visit.
+  function rng(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
+  // Soft organic variation: a few summed waves at random angles.
+  function waves(seed, scale) {
+    const R = rng(seed), w = [];
+    for (let i = 0; i < 4; i++) { const a = R() * TAU, f = (0.6 + R() * 1.4) / scale; w.push([Math.cos(a) * f, Math.sin(a) * f, R() * TAU, 1 / (i + 1)]); }
+    const n = w.reduce((s, q) => s + q[3], 0);
+    return (x, y) => { let s = 0; for (const q of w) s += Math.sin(x * q[0] + y * q[1] + q[2]) * q[3]; return 0.5 + 0.5 * s / n; };
+  }
+
+  // One hand-inked dot: a slightly irregular closed curve.
+  function makeDot(R, x, y, r, alpha) {
+    const n = r < 1.25 ? 0 : 7 + (R() * 3 | 0), v = new Float32Array(n * 2), rot = R() * TAU;
+    for (let i = 0; i < n; i++) { const a = rot + i / n * TAU, k = 1 + (R() - 0.5) * 0.3; v[i * 2] = Math.cos(a) * k; v[i * 2 + 1] = Math.sin(a) * k; }
+    return { x, y, r, v, c: SHADES[R() * 4 | 0], a: (0.55 + R() * 0.45) * alpha, ox: 0, oy: 0, vx: 0, vy: 0 };
+  }
+
+  // Variable-spacing dart throwing: denser where density is high, never clumped.
+  function stipple(w, h, density, seed, o) {
+    const R = rng(seed), cell = o.rmax, gw = Math.ceil(w / cell) + 2, grid = new Map(), dots = [];
+    const tries = Math.round(w * h / o.per);
+    for (let i = 0; i < tries; i++) {
+      const x = R() * w, y = R() * h, d = density(x, y);
+      if (d <= 0.004 || R() > Math.min(1, d * 1.6)) continue;
+      const sp = o.rmax - (o.rmax - o.rmin) * Math.pow(Math.min(d, 1), 0.55), sp2 = sp * sp;
+      const gx = Math.floor(x / cell), gy = Math.floor(y / cell);
+      let ok = true;
+      for (let yy = gy - 1; yy <= gy + 1 && ok; yy++) for (let xx = gx - 1; xx <= gx + 1 && ok; xx++) {
+        const c = grid.get(yy * gw + xx); if (!c) continue;
+        for (const q of c) { const dx = q.x - x, dy = q.y - y; if (dx * dx + dy * dy < sp2) { ok = false; break; } }
+      }
+      if (!ok) continue;
+      let r = R() < o.big ? 2.5 + R() * 1.1 : 0.9 + R() * 1.3;
+      r *= 0.8 + 0.35 * d;
+      const dot = makeDot(R, x, y, r, 1);
+      dots.push(dot);
+      const key = gy * gw + gx; (grid.get(key) || grid.set(key, []).get(key)).push(dot);
+    }
+    const dust = Math.round(w * h / o.dustPer);
+    for (let i = 0; i < dust; i++) { const x = R() * w, y = R() * h, d = density(x, y); if (d < 0.03 || R() > d * 2) continue; dots.push(makeDot(R, x, y, 0.45 + R() * 0.3, 0.6)); }
+    return dots;
+  }
+
+  function paint(ctx, dots, w, h, t) {
+    ctx.clearRect(0, 0, w, h);
+    for (const d of dots) {
+      let a = d.a, x = d.x + d.ox, y = d.y + d.oy;
+      if (t !== undefined && d.t0 !== undefined) {
+        const p = (t - d.t0) / 1100;
+        if (p <= 0) continue;
+        if (p < 1) { const e = 1 - Math.pow(1 - p, 3); a *= Math.min(1, p * 1.8); x += d.sx * (1 - e); y += d.sy * (1 - e); }
+      }
+      ctx.globalAlpha = a; ctx.fillStyle = d.c; ctx.beginPath();
+      const v = d.v, n = v.length / 2, r = d.r;
+      if (!n) ctx.arc(x, y, r, 0, TAU);
+      else {
+        const lx = x + v[(n - 1) * 2] * r, ly = y + v[(n - 1) * 2 + 1] * r, fx = x + v[0] * r, fy = y + v[1] * r;
+        ctx.moveTo((lx + fx) / 2, (ly + fy) / 2);
+        for (let i = 0; i < n; i++) {
+          const j = (i + 1) % n, ax = x + v[i * 2] * r, ay = y + v[i * 2 + 1] * r, bx = x + v[j * 2] * r, by = y + v[j * 2 + 1] * r;
+          ctx.quadraticCurveTo(ax, ay, (ax + bx) / 2, (ay + by) / 2);
+        }
+      }
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function sizeCanvas(c, w, h) { c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); const ctx = c.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); return ctx; }
+
+  /* ---------- Masthead field: the collective gathers beside the headline ---------- */
+  const field = $('#field');
+  const H = { dots: [], w: 0, h: 0, start: 0, end: 0, ctx: null, anchor: [0, 0], R: 1 };
+  let pointer = null, raf = 0;
+  const RAD = 170, RAD2 = RAD * RAD;
+
+  function textRects(base) {
+    const out = [];
+    const rg = document.createRange();
+    for (const el of [$('#hero h1'), $('.lede')]) {
+      rg.selectNodeContents(el);
+      for (const r of rg.getClientRects()) if (r.width > 2) out.push([r.left - base.left, r.top - base.top, r.right - base.left, r.bottom - base.top]);
+    }
+    return out;
+  }
+
+  function buildHero(animate) {
+    const base = field.getBoundingClientRect();
+    const w = document.documentElement.clientWidth;
+    const h = Math.ceil($('#hero').getBoundingClientRect().bottom - base.top);
+    field.style.height = h + 'px';
+    H.ctx = sizeCanvas(field, w, h); H.w = w; H.h = h;
+    const headH = $('.site').offsetHeight;
+    const ax = w - clamp(w * 0.17, 40, 260), ay = headH + (h - headH) * 0.5, R = clamp(w * 0.46, 230, 660);
+    H.anchor = [ax, ay]; H.R = R;
+    const rects = textRects(base), nz = waves(5, 120);
+    const clear = (x, y) => {
+      let f = 1;
+      for (const [l, t, r, b] of rects) {
+        const dx = Math.max(l - 12 - x, 0, x - r - 12), dy = Math.max(t - 6 - y, 0, y - b - 6), dist = Math.hypot(dx, dy);
+        f = Math.min(f, 0.08 + 0.92 * smooth(0, 44, dist));
+      }
+      return f;
+    };
+    const density = (x, y) => {
+      const dx = x - ax, dy = (y - ay) * 1.3;
+      let d = 1 - Math.hypot(dx, dy) / R;
+      if (d <= 0) return 0;
+      d = Math.pow(d, 1.35) * (0.68 + 0.45 * nz(x, y));
+      d *= smooth(headH - 6, headH + 90, y) * (1 - smooth(h - 90, h, y));
+      return Math.min(0.95, d * clear(x, y));
+    };
+    H.dots = stipple(w, h, density, 1907, { rmin: 7, rmax: 22, per: 13, big: 0.05, dustPer: 2400 });
+    if (animate && !reduce) {
+      const R2 = rng(77);
+      let end = 0;
+      for (const d of H.dots) {
+        const dx = d.x - ax, dy = d.y - ay, dist = Math.hypot(dx, dy) || 1, push = 10 + R2() * 16;
+        d.t0 = (dist / R) * 560 + R2() * 380; d.sx = dx / dist * push; d.sy = dy / dist * push;
+        end = Math.max(end, d.t0 + 1100);
+      }
+      H.start = performance.now(); H.end = end;
+      kick();
+    } else {
+      H.end = 0; paint(H.ctx, H.dots, w, h);
+    }
+  }
+
+  function frame(now) {
+    raf = 0;
+    const t = now - H.start;
+    let moving = t < H.end;
+    if (fine && !reduce) {
+      for (const d of H.dots) {
+        let tx = 0, ty = 0;
+        if (pointer) {
+          const dx = pointer.x - d.x, dy = pointer.y - d.y, dd = dx * dx + dy * dy;
+          if (dd < RAD2) { const f = 1 - Math.sqrt(dd) / RAD, k = f * f * 0.2; tx = dx * k; ty = dy * k; }
+        }
+        d.vx = (d.vx + (tx - d.ox) * 0.08) * 0.8; d.vy = (d.vy + (ty - d.oy) * 0.08) * 0.8;
+        d.ox += d.vx; d.oy += d.vy;
+        if (!moving && (Math.abs(d.vx) + Math.abs(d.vy) > 0.004 || Math.abs(tx - d.ox) + Math.abs(ty - d.oy) > 0.02)) moving = true;
+      }
+    }
+    paint(H.ctx, H.dots, H.w, H.h, t);
+    if (moving) raf = requestAnimationFrame(frame);
+  }
+  function kick() { if (!raf) raf = requestAnimationFrame(frame); }
+
+  if (fine && !reduce) {
+    addEventListener('pointermove', e => {
+      const b = field.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top;
+      const next = (y > -30 && y < H.h + 30) ? { x, y } : null;
+      if (next || pointer) { pointer = next; kick(); }
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', () => { if (pointer) { pointer = null; kick(); } });
+  }
+
+  /* ---------- Footer: Rise ---------- */
+  function buildRise() {
+    const c = $('#rise'), w = c.clientWidth, h = c.clientHeight;
+    const ctx = sizeCanvas(c, w, h), nz = waves(11, 260), nz2 = waves(23, 80);
+    const density = (x, y) => {
+      const ridge = 0.16 + 0.42 * nz(x, 0) + 0.12 * (nz2(x, y) - 0.5), u = y / h;
+      if (u < ridge) return 0;
+      return Math.min(0.92, Math.pow((u - ridge) / (1 - ridge), 1.25) * (0.78 + 0.32 * nz2(x, y)));
+    };
+    paint(ctx, stipple(w, h, density, 31, { rmin: 6.5, rmax: 22, per: 12, big: 0.05, dustPer: 2200 }), w, h);
+  }
+
+  /* ---------- Index rows: one dot at rest, the cluster gathers on hover ---------- */
+  function blobPath(x, y, r, R) {
+    const n = 8, rot = R() * TAU, p = [];
+    for (let i = 0; i < n; i++) { const a = rot + i / n * TAU, k = 1 + (R() - 0.5) * 0.3; p.push([x + Math.cos(a) * r * k, y + Math.sin(a) * r * k]); }
+    const m = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], f = v => v.toFixed(2);
+    const s = m(p[n - 1], p[0]); let d = `M${f(s[0])} ${f(s[1])}`;
+    for (let i = 0; i < n; i++) { const q = m(p[i], p[(i + 1) % n]); d += `Q${f(p[i][0])} ${f(p[i][1])} ${f(q[0])} ${f(q[1])}`; }
+    return d + 'Z';
+  }
+  document.querySelectorAll('.row .num').forEach((num, i) => {
+    const R = rng(101 + i * 17), pts = [];
+    let html = '';
+    for (let tries = 0; pts.length < 10 && tries < 400; tries++) {
+      const first = pts.length === 0, a = R() * TAU, rr = first ? 0 : 3 + Math.sqrt(R()) * 11;
+      const x = 15 + Math.cos(a) * rr, y = 15 + Math.sin(a) * rr * 0.85, r = first ? 2.7 : 0.9 + R() * 1.5;
+      if (pts.some(q => Math.hypot(q[0] - x, q[1] - y) < q[2] + r + 1.6)) continue;
+      pts.push([x, y, r]);
+      const push = 7 + R() * 9, op = first ? 1 : (0.6 + R() * 0.4).toFixed(2);
+      html += `<path${first ? ' class="seed"' : ''} d="${blobPath(x, y, r, R)}" fill="${SHADES[R() * 4 | 0]}" fill-opacity="${op}" style="--x:${(Math.cos(a) * push).toFixed(1)}px;--y:${(Math.sin(a) * push).toFixed(1)}px;--d:${pts.length * 26}ms"/>`;
+    }
+    num.insertAdjacentHTML('beforeend', `<svg class="cluster" viewBox="0 0 30 30" aria-hidden="true">${html}</svg>`);
+  });
+
+  /* ---------- Header compacts after the masthead ---------- */
+  const site = $('.site');
+  new IntersectionObserver(([e]) => site.classList.toggle('is-compact', !e.isIntersecting)).observe($('#sentinel'));
+
+  /* ---------- Boot once the type has settled, so the dots respect the real line breaks ---------- */
+  const fontsReady = Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(r => setTimeout(r, 1200))]);
+  fontsReady.then(() => { buildHero(true); buildRise(); });
+  let rt, lastW = document.documentElement.clientWidth;
+  addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => {
+      const w = document.documentElement.clientWidth;
+      if (w === lastW) return;
+      lastW = w; buildHero(false); buildRise();
+    }, 160);
+  });
+})();
+</script>
+</body>
+</html>
