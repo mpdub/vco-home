@@ -24,7 +24,7 @@
   --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
   --gutter:clamp(16px,3.4vw,48px);
   --ease:cubic-bezier(.2,.75,.25,1);
-  --lockup:clamp(150px,15vw,210px);
+  --lockup:280px; /* minimum size for the full lockup on screen: below this, REGISTERED VALUERS drops under 10px */
   --head-h:calc(56px + var(--lockup) * .2447);
   color-scheme:light;
 }
@@ -94,7 +94,6 @@ main{position:relative;padding-top:var(--head-h)}
 .about{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:40px 80px;padding-block:clamp(80px,9vw,128px) clamp(56px,6vw,88px)}
 .statement{flex:999 1 520px;min-width:0;margin:0;font-size:clamp(28px,2.9vw,42px);line-height:1.18;letter-spacing:-.01em;max-width:21em;text-wrap:pretty}
 .team{flex:1 1 280px;min-width:0}
-.label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);margin-bottom:14px}
 .names{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 24px;font-family:var(--mono);font-size:14px}
 
 /* Footer */
@@ -103,6 +102,10 @@ footer{position:relative}
 .foot{display:flex;flex-wrap:wrap;gap:10px 32px;justify-content:space-between;padding-block:22px 34px;
   font-family:var(--mono);font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums}
 
+@media (max-width:900px){
+  :root{--lockup:150px}
+  .lockup .rv{opacity:0}
+}
 @media (max-width:760px){
   .row{grid-template-columns:3.25rem minmax(0,1fr) 2rem;column-gap:1rem}
   .detail{grid-column:2/3;grid-row:2;font-size:13.5px}
@@ -146,9 +149,8 @@ footer{position:relative}
   </nav>
 
   <section class="about wrap" id="about">
-    <p class="statement">Every valuation goes out with our name on it, and we intend to make that name worth something.</p>
+    <p class="statement">Every valuation goes out with our name on it.</p>
     <div class="team">
-      <div class="label">The collective</div>
       <ul class="names">
         <li>Jason Wong</li><li>Kurt Brunsdon</li><li>Adam Mercer</li><li>Ben Fraser</li><li>Daniel Patel</li><li>Luke Bennett</li>
         <li>Simon Clarke</li><li>Hannah Reid</li><li>Tom Gallagher</li><li>Priya Nair</li><li>Sam Whitaker</li><li>Olivia Tane</li>
